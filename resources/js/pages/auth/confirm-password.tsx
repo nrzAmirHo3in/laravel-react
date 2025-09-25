@@ -1,4 +1,3 @@
-// Components
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
@@ -24,20 +23,21 @@ export default function ConfirmPassword() {
 
     return (
         <AuthLayout
-            title="Confirm your password"
-            description="This is a secure area of the application. Please confirm your password before continuing."
+            title="تأیید رمز عبور"
+            description="این بخش از برنامه امن است. لطفاً قبل از ادامه، رمز عبور خود را تأیید کنید."
+             className="border p-5 rounded-md shadow"
         >
-            <Head title="Confirm password" />
+            <Head title="تأیید رمز عبور" />
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} dir='rtl'>
                 <div className="space-y-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">رمز عبور</Label>
                         <Input
                             id="password"
                             type="password"
                             name="password"
-                            placeholder="Password"
+                            placeholder="رمز عبور"
                             autoComplete="current-password"
                             value={data.password}
                             autoFocus
@@ -50,7 +50,7 @@ export default function ConfirmPassword() {
                     <div className="flex items-center">
                         <Button className="w-full" disabled={processing}>
                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                            Confirm password
+                            تأیید رمز عبور
                         </Button>
                     </div>
                 </div>

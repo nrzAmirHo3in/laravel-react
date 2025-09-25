@@ -139,3 +139,20 @@
         @apply bg-background text-foreground;
     }
 }
+
+@font-face {
+    font-family: 'Shabnam';
+    src: url('fonts/Shabnam.eot');
+    src: url('fonts/Shabnam.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Shabnam.woff2') format('woff2'),
+        url('fonts/Shabnam.woff') format('woff'),
+        url('fonts/Shabnam.ttf') format('truetype'),
+        url('fonts/Shabnam.svg#Shabnam') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    font-family: 'Shabnam' !important;
+}

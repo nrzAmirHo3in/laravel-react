@@ -1,6 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useState } from 'react';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
@@ -11,7 +11,8 @@ import AuthLayout from '@/layouts/auth-layout';
 
 type RegisterForm = {
     name: string;
-    email: string;
+    phone: string;
+    verification_code: string;
     password: string;
     password_confirmation: string;
 };
@@ -19,25 +20,49 @@ type RegisterForm = {
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm<Required<RegisterForm>>({
         name: '',
-        email: '',
+        phone: '',
+        verification_code: '',
         password: '',
         password_confirmation: '',
     });
 
+    const [codeSent, setCodeSent] = useState(false);
+    const [sendingCode, setSendingCode] = useState(false);
+
+    const sendVerificationCode = async () => {
+        const phonePattern = /^09\d{9}$/;
+        if (!phonePattern.test(data.phone)) {
+            alert('لطفاً شماره تلفن معتبر وارد کنید.');
+            return;
+        }
+
+        setSendingCode(true);
+        try {
+            await post(route('send-phone-verification'), {
+                data: { phone: data.phone },
+                preserveScroll: true,
+            });
+            setCodeSent(true);
+            alert('کد تایید به شماره شما ارسال شد.');
+        } finally {
+            setSendingCode(false);
+        }
+    };
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('register'), {
-            onFinish: () => reset('password', 'password_confirmation'),
+            onFinish: () => reset('password', 'password_confirmation', 'verification_code'),
         });
     };
 
     return (
-        <AuthLayout title="Create an account" description="Enter your details below to create your account">
-            <Head title="Register" />
-            <form className="flex flex-col gap-6" onSubmit={submit}>
+        <AuthLayout title="ساخت حساب کاربری" description="جزئیات خود را وارد کنید تا حساب کاربری ایجاد شود" className="border p-5 rounded-md shadow">
+            <Head title="ثبت‌نام" />
+            <form className="flex flex-col gap-6" onSubmit={submit} dir='rtl'>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name">نام و نام خانوادگی</Label>
                         <Input
                             id="name"
                             type="text"
@@ -48,69 +73,90 @@ export default function Register() {
                             value={data.name}
                             onChange={(e) => setData('name', e.target.value)}
                             disabled={processing}
-                            placeholder="Full name"
+                            placeholder="نام کامل"
                         />
                         <InputError message={errors.name} className="mt-2" />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            required
-                            tabIndex={2}
-                            autoComplete="email"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            disabled={processing}
-                            placeholder="email@example.com"
-                        />
-                        <InputError message={errors.email} />
+                        <Label htmlFor="phone">شماره تلفن</Label>
+                        <div className="flex gap-2">
+                            <Input
+                                id="phone"
+                                type="tel"
+                                required
+                                tabIndex={2}
+                                autoComplete="tel"
+                                value={data.phone}
+                                onChange={(e) => setData('phone', e.target.value)}
+                                disabled={processing || codeSent}
+                                placeholder="09123456789"
+                            />
+                            <Button type="button" onClick={sendVerificationCode} disabled={sendingCode || codeSent}>
+                                {sendingCode ? <LoaderCircle className="h-4 w-4 animate-spin" /> : 'ارسال کد'}
+                            </Button>
+                        </div>
+                        <InputError message={errors.phone} />
                     </div>
 
+                    {codeSent && (
+                        <div className="grid gap-2">
+                            <Label htmlFor="verification_code">کد تایید شماره تلفن</Label>
+                            <Input
+                                id="verification_code"
+                                type="text"
+                                required
+                                tabIndex={3}
+                                value={data.verification_code}
+                                onChange={(e) => setData('verification_code', e.target.value)}
+                                placeholder="کد تایید"
+                            />
+                            <InputError message={errors.verification_code} />
+                        </div>
+                    )}
+
                     <div className="grid gap-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">رمز عبور</Label>
                         <Input
                             id="password"
                             type="password"
                             required
-                            tabIndex={3}
+                            tabIndex={4}
                             autoComplete="new-password"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
                             disabled={processing}
-                            placeholder="Password"
+                            placeholder="رمز عبور"
                         />
                         <InputError message={errors.password} />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="password_confirmation">Confirm password</Label>
+                        <Label htmlFor="password_confirmation">تأیید رمز عبور</Label>
                         <Input
                             id="password_confirmation"
                             type="password"
                             required
-                            tabIndex={4}
+                            tabIndex={5}
                             autoComplete="new-password"
                             value={data.password_confirmation}
                             onChange={(e) => setData('password_confirmation', e.target.value)}
                             disabled={processing}
-                            placeholder="Confirm password"
+                            placeholder="تأیید رمز عبور"
                         />
                         <InputError message={errors.password_confirmation} />
                     </div>
 
-                    <Button type="submit" className="mt-2 w-full" tabIndex={5} disabled={processing}>
+                    <Button type="submit" className="mt-2 w-full" tabIndex={6} disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                        Create account
+                        ساخت حساب
                     </Button>
                 </div>
 
                 <div className="text-center text-sm text-muted-foreground">
-                    Already have an account?{' '}
-                    <TextLink href={route('login')} tabIndex={6}>
-                        Log in
+                    حساب کاربری دارید؟{' '}
+                    <TextLink href={route('login')} tabIndex={7}>
+                        ورود
                     </TextLink>
                 </div>
             </form>
