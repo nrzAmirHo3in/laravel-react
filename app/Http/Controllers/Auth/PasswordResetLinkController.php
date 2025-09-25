@@ -29,13 +29,13 @@ class PasswordResetLinkController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'email' => 'required|email',
+            'phone' => 'required|string',
         ]);
 
         Password::sendResetLink(
-            $request->only('email')
+            $request->only('phone')
         );
 
-        return back()->with('status', __('A reset link will be sent if the account exists.'));
+        return back()->with('status', __('لینک تغییر رمز عبور برای شما ارسال شد.'));
     }
 }

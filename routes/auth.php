@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
+        
+    Route::post('/send-phone-verification', [RegisteredUserController::class, 'sendPhoneVerification'])->name('send-phone-verification');
+
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
