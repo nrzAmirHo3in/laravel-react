@@ -156,3 +156,7 @@
 * {
     font-family: 'Shabnam' !important;
 }
+
+button, input[type=button]{
+    cursor: pointer;
+}

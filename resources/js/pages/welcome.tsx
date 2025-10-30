@@ -1,9 +1,10 @@
+import { ping } from '@/components/api';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
 export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
-
+    ping().then(d=>console.log(d)).catch();
     return (
         <>
             <Head title="Welcome">
