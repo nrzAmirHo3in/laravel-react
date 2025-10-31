@@ -1,6 +1,8 @@
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
@@ -28,18 +30,50 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         remember: false,
     });
 
+    // نمایش خطاهای فرم با toast
+    useEffect(() => {
+        if (errors.phone) {
+            toast.error(errors.phone);
+        }
+        if (errors.password) {
+            toast.error(errors.password);
+        }
+    }, [errors.phone, errors.password]);
+
+    // نمایش پیام status با toast
+    useEffect(() => {
+        if (status) {
+            toast.success(status);
+        }
+    }, [status]);
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
         // ولیدیشن ساده شماره تلفن قبل از ارسال
         const phonePattern = /^09\d{9}$/;
         if (!phonePattern.test(data.phone)) {
-            setData('phone', data.phone); // برای نمایش خطا
+            toast.error('شماره تلفن باید با 09 شروع شود و 11 رقم باشد');
+            return;
+        }
+
+        // ولیدیشن رمز عبور
+        if (data.password.length < 6) {
+            toast.error('رمز عبور باید حداقل 6 کاراکتر باشد');
             return;
         }
 
         post(route('login'), {
             onFinish: () => reset('password'),
+            onError: (errors) => {
+                // نمایش خطاهای عمومی که در فیلدهای خاصی نیستند
+                if (errors.message) {
+                    toast.error(errors.message);
+                }
+            },
+            onSuccess: () => {
+                toast.success('با موفقیت وارد شدید!');
+            },
         });
     };
 
@@ -54,10 +88,9 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         <Input
                             id="phone"
                             type="tel"
-                            required
                             autoFocus
                             tabIndex={1}
-                            autoComplete="tel"
+                            autoComplete="off"
                             value={data.phone}
                             onChange={(e) => setData('phone', e.target.value)}
                             placeholder="09123456789"
@@ -78,9 +111,8 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         <Input
                             id="password"
                             type="password"
-                            required
                             tabIndex={2}
-                            autoComplete="current-password"
+                            autoComplete="off"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
                             placeholder="رمز عبور"
@@ -112,8 +144,6 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     </TextLink>
                 </div>
             </form>
-
-            {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
         </AuthLayout>
     );
 }

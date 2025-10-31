@@ -9,7 +9,7 @@ import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'داشبورد',
         href: '/dashboard',
         icon: LayoutGrid,
     },
@@ -44,7 +44,7 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} header='Platform' />
+                <NavMain items={mainNavItems} header='برنامه' />
             </SidebarContent>
 
             <SidebarFooter>
