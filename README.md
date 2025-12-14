@@ -6,7 +6,6 @@
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net)
-![License: MIT](https://img.shields.io/github/license/nrzAmirHo3in/laravel-react)
 
 </div>
 
@@ -97,8 +96,8 @@ This project includes preinstalled authentication API endpoints:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/ping` | Test ping without token |
-| POST | `/api/auth/ping` | Test ping with token |
+| GET | `/api/ping` | Test ping without token |
+| GET | `/api/auth/ping` | Test ping with token |
 
 > Check the backend routes file (`routes/api.php`) for the exact routes and middlewares.
 
