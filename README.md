@@ -33,16 +33,6 @@
 - 🚀 **Ready-to-customize boilerplate** - Perfect foundation for production applications
 - 🇮🇷 **Native Persian/Farsi support** - Optimized for Iranian developers and users
 
-## 📷 Quick Demo
-
-<div align="center">
-
-![Screenshot placeholder](./docs/screenshot.png)
-
-*Add your own screenshots here to showcase the application*
-
-</div>
-
 ## 🛠️ Requirements
 
 ### Backend (Laravel)
@@ -54,9 +44,6 @@
 - Node.js 16+
 - npm or yarn
 
-### Optional
-- SMS provider account (e.g., Twilio, Kavenegar, or local SMS gateway)
-
 ## 🚀 Installation
 
 ### Backend Setup (Laravel)
@@ -66,14 +53,17 @@
 git clone https://github.com/nrzAmirHo3in/laravel-react.git
 cd laravel-react
 
-# 2. Install PHP dependencies
+# 2. Install node dependencies
+npm install
+
+# 3. Install PHP dependencies
 composer install
 
-# 3. Copy and edit environment file
+# 4. Copy and edit environment file
 cp .env.example .env
 ```
 
-Edit `.env` and set `DB_*`, `APP_URL`, and SMS provider variables (see below).
+Edit `.env` and set `DB_*`, `APP_URL`
 
 ```bash
 # 4. Generate application key
@@ -82,9 +72,11 @@ php artisan key:generate
 # 5. Run migrations and seeders
 php artisan migrate --seed
 
-# 6. Start the Laravel server (for local development)
-php artisan serve
+# 6. Start the server (for local development)
+composer run dev
 ```
+
+> Or you can run start file with ```sh start.sh```
 
 ### Environment Variables
 
@@ -99,55 +91,20 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-#### SMS Provider Configuration (Example placeholders)
-```
-SMS_PROVIDER=twilio
-SMS_ACCOUNT_SID=your_twilio_sid
-SMS_AUTH_TOKEN=your_twilio_token
-SMS_FROM=+1234567890
-```
-
-> **Note:** If you use a local Iranian provider like Kavenegar, replace placeholders accordingly. Keep API keys secret and never commit them to version control.
-
-### Frontend Setup (React)
-
-```bash
-# 1. Navigate to frontend directory (adjust path if different)
-cd frontend
-
-# 2. Install dependencies
-npm install
-# or
-yarn install
-
-# 3. Copy environment example
-cp .env.example .env
-# Set API base URL, e.g. REACT_APP_API_URL=http://localhost:8000/api
-
-# 4. Start development server
-npm run dev
-# or
-yarn dev
-```
-
 ## 📡 API Endpoints
 
 This project includes preinstalled authentication API endpoints:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Login with email/password |
-| POST | `/api/auth/logout` | Logout |
-| POST | `/api/auth/refresh` | Refresh token |
-| POST | `/api/auth/request-sms` | Request SMS code for phone login |
-| POST | `/api/auth/verify-sms` | Verify SMS code and login/register |
+| POST | `/api/ping` | Test ping without token |
+| POST | `/api/auth/ping` | Test ping with token |
 
 > Check the backend routes file (`routes/api.php`) for the exact routes and middlewares.
 
 ## 📖 Persian Font & RTL Support
 
-The frontend includes Persian font and basic RTL adjustments. If you need alternate fonts, replace font files in `frontend/public/fonts` (or where fonts are stored) and update CSS accordingly.
+The frontend includes Persian font and basic RTL adjustments. If you need alternate fonts, replace font files in `resources/css/fonts` (or where fonts are stored) and update CSS accordingly.
 
 ## 🌐 Deployment Tips
 
