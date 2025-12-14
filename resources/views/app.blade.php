@@ -41,7 +41,10 @@
 
         @routes
         @viteReactRefresh
-        @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+        @php
+            $fileExtension = file_exists(resource_path("js/pages/{$page['component']}.tsx")) ? 'tsx' : 'jsx';
+        @endphp
+        @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.{$fileExtension}"])
         @inertiaHead
     </head>
     <body class="font-sans antialiased" dir="rtl">
