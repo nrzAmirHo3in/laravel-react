@@ -1,160 +1,210 @@
 # Laravel + React Starter (Laravel-React)
-A minimal full-stack starter combining a PHP Laravel backend and a TypeScript/JavaScript React frontend for building API-driven web apps — with built-in Auth API, phone SMS login/verification section, and Persian (Farsi) font support.
 
-نسخه فارسی (اول)
-----------------
-این مخزن یک استارتر ساده فول‌استک است که بک‌اند آن با Laravel (PHP) و فرانت‌اند آن با React (TypeScript/JavaScript) ساخته شده است. 
+<div align="center">
+
+[![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net)
+![License: MIT](https://img.shields.io/github/license/nrzAmirHo3in/laravel-react)
+
+</div>
+
+<div align="center">
+  A minimal full-stack starter combining PHP Laravel backend and TypeScript/JavaScript React frontend for building API-driven web applications — with built-in Auth API, phone SMS login/verification, and Persian (Farsi) font support.
+</div>
+
+## 🇮🇷 نسخه فارسی (اول)
+
+این مخزن یک استارتر ساده فول‌استک است که بک‌اند آن با Laravel (PHP) و فرانت‌اند آن با React (TypeScript/JavaScript) ساخته شده است.
 این پروژه به صورت پیش‌فرض:
+
 - API و Auth API نصب و آماده‌اند
 - بخش ورود/ثبت‌نام با SMS موبایل اضافه شده
 - فونت فارسی (Persian font) اضافه و تنظیم شده تا تجربه کاربری مناسب برای زبان فارسی داشته باشید
 
-ویژگی‌ها
-- API-driven architecture (Laravel API + React frontend)
-- Authentication APIs (register, login, logout, refresh token, password reset)
-- Phone SMS verification / login flow (قابلیت ارسال کد به موبایل)
-- Persian font and RTL-friendly base styling
-- Typescript-ready React frontend
-- Ready-to-customize boilerplate for production
+## ✨ Features
 
-Short description (for GitHub repo description)
-- Persian: استارتر ساده لاراول + ری‌اکت با API، احراز هویت و پشتیبانی از ورود با پیامک و فونت فارسی
-- English: Minimal Laravel + React starter with preinstalled API & Auth, SMS phone login support, and Persian font
+- 🔐 **Authentication APIs** - Register, login, logout, refresh token, password reset
+- 📱 **Phone SMS verification / login flow** - Capability to send verification codes to mobile phones
+- 🌍 **Persian font and RTL-friendly** - Base styling optimized for right-to-left languages
+- ⚛️ **TypeScript-ready React frontend** - With modern React features and type safety
+- 🏗️ **API-driven architecture** - Clean separation between Laravel API and React frontend
+- 🚀 **Ready-to-customize boilerplate** - Perfect foundation for production applications
+- 🇮🇷 **Native Persian/Farsi support** - Optimized for Iranian developers and users
 
-Quick demo (replace with your own screenshots)
+## 📷 Quick Demo
+
+<div align="center">
+
 ![Screenshot placeholder](./docs/screenshot.png)
 
-Requirements / ملزومات
-- PHP 8.1+ (or your project's required PHP version)
+*Add your own screenshots here to showcase the application*
+
+</div>
+
+## 🛠️ Requirements
+
+### Backend (Laravel)
+- PHP 8.1+
 - Composer
-- Node.js 16+ and npm or yarn
-- MySQL / PostgreSQL or other supported DB
-- (Optional) SMS provider account (e.g., Twilio, Kavenegar, or local SMS gateway)
+- MySQL / PostgreSQL or other supported database
 
-Installation — Backend (Laravel)
-1. Clone the repo:
-   git clone https://github.com/nrzAmirHo3in/laravel-react.git
-   cd laravel-react
+### Frontend (React)
+- Node.js 16+
+- npm or yarn
 
-2. Install PHP dependencies:
-   composer install
+### Optional
+- SMS provider account (e.g., Twilio, Kavenegar, or local SMS gateway)
 
-3. Copy and edit environment file:
-   cp .env.example .env
-   Edit .env and set DB_* and APP_URL, and SMS provider variables (see below).
+## 🚀 Installation
 
-4. Generate app key:
-   php artisan key:generate
+### Backend Setup (Laravel)
 
-5. Run migrations and seeders:
-   php artisan migrate --seed
+```bash
+# 1. Clone the repository
+git clone https://github.com/nrzAmirHo3in/laravel-react.git
+cd laravel-react
 
-6. Start the Laravel server (local dev):
-   php artisan serve
+# 2. Install PHP dependencies
+composer install
 
-Environment variables (important ones)
-- APP_URL=http://localhost:8000
-- DB_CONNECTION=mysql
-- DB_HOST=127.0.0.1
-- DB_PORT=3306
-- DB_DATABASE=laravel_react
-- DB_USERNAME=root
-- DB_PASSWORD=
+# 3. Copy and edit environment file
+cp .env.example .env
+```
 
-SMS provider (example placeholders):
-- SMS_PROVIDER=twilio
-- SMS_ACCOUNT_SID=your_twilio_sid
-- SMS_AUTH_TOKEN=your_twilio_token
-- SMS_FROM=+1234567890
+Edit `.env` and set `DB_*`, `APP_URL`, and SMS provider variables (see below).
 
-(If you use a local Iranian provider like Kavenegar, replace placeholders accordingly. Keep API keys secret.)
+```bash
+# 4. Generate application key
+php artisan key:generate
 
-Installation — Frontend (React)
-1. Move to frontend folder (adjust path if different):
-   cd frontend
-2. Install dependencies:
-   npm install
-   # or
-   yarn
-3. Copy environment example:
-   cp .env.example .env
-   # Set API base URL, e.g. REACT_APP_API_URL=http://localhost:8000/api
-4. Start dev server:
-   npm run dev
-   # or
-   yarn dev
+# 5. Run migrations and seeders
+php artisan migrate --seed
 
-API and Auth
-This project includes preinstalled API and Auth API endpoints (example endpoint names — update to match your code):
-- POST /api/auth/register — Register a new user
-- POST /api/auth/login — Login with email/password
-- POST /api/auth/logout — Logout
-- POST /api/auth/refresh — Refresh token
-- POST /api/auth/request-sms — Request SMS code for phone login
-- POST /api/auth/verify-sms — Verify SMS code and login/register
+# 6. Start the Laravel server (for local development)
+php artisan serve
+```
 
-Check the backend routes file (routes/api.php) for the exact routes and middlewares.
+### Environment Variables
 
-Persian font & RTL
-- The frontend includes a Persian font and basic RTL adjustments. If you need alternate fonts, replace font files in `frontend/public/fonts` (or where fonts are stored) and update CSS accordingly.
+#### Laravel Backend
+```
+APP_URL=http://localhost:8000
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_react
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-Deployment tips
+#### SMS Provider Configuration (Example placeholders)
+```
+SMS_PROVIDER=twilio
+SMS_ACCOUNT_SID=your_twilio_sid
+SMS_AUTH_TOKEN=your_twilio_token
+SMS_FROM=+1234567890
+```
+
+> **Note:** If you use a local Iranian provider like Kavenegar, replace placeholders accordingly. Keep API keys secret and never commit them to version control.
+
+### Frontend Setup (React)
+
+```bash
+# 1. Navigate to frontend directory (adjust path if different)
+cd frontend
+
+# 2. Install dependencies
+npm install
+# or
+yarn install
+
+# 3. Copy environment example
+cp .env.example .env
+# Set API base URL, e.g. REACT_APP_API_URL=http://localhost:8000/api
+
+# 4. Start development server
+npm run dev
+# or
+yarn dev
+```
+
+## 📡 API Endpoints
+
+This project includes preinstalled authentication API endpoints:
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Login with email/password |
+| POST | `/api/auth/logout` | Logout |
+| POST | `/api/auth/refresh` | Refresh token |
+| POST | `/api/auth/request-sms` | Request SMS code for phone login |
+| POST | `/api/auth/verify-sms` | Verify SMS code and login/register |
+
+> Check the backend routes file (`routes/api.php`) for the exact routes and middlewares.
+
+## 📖 Persian Font & RTL Support
+
+The frontend includes Persian font and basic RTL adjustments. If you need alternate fonts, replace font files in `frontend/public/fonts` (or where fonts are stored) and update CSS accordingly.
+
+## 🌐 Deployment Tips
+
 - Serve Laravel with php-fpm + Nginx or shared hosting
-- Build frontend for production: npm run build (or yarn build) and serve the build folder; you can also integrate the built assets into Laravel `public` folder or host frontend separately
+- Build frontend for production: `npm run build` (or `yarn build`) and serve the build folder
+- You can integrate the built assets into Laravel `public` folder or host frontend separately
 - Use HTTPS in production and configure environment variables securely
 - Consider queuing SMS sending (Laravel queue) for production reliability
 
-Security & best practices
-- Never commit your .env with secrets
-- Use strong keys & rotate SMS/API keys
+## 🔒 Security Best Practices
+
+- Never commit your `.env` file with secrets
+- Use strong keys & rotate SMS/API keys regularly
 - Rate-limit SMS endpoints to avoid abuse
 - Use HTTPS, CSP and secure cookies in production
+- Implement proper validation and sanitization for all user inputs
 
-License
-I recommend MIT for open source permissive licensing. To add:
-   curl -L https://opensource.org/licenses/MIT -o LICENSE
-Or create a LICENSE file with the standard MIT template.
+## 🤝 Contributing
 
-How to make the repo public (so all people can see it)
-1. GitHub website:
-   - Go to your repository page -> Settings -> General -> Danger Zone -> Change repository visibility -> Make public.
-   - Confirm by typing the repo name when prompted.
-2. GitHub CLI:
-   - Install GitHub CLI (gh) and authenticate:
-     gh auth login
-   - Run:
-     gh repo edit nrzAmirHo3in/laravel-react --visibility public
+Contributions are welcome! Here's how you can contribute:
 
-Add topics/tags (recommended)
-- laravel
-- react
-- typescript
-- php
-- full-stack
-- starter
-- api
-- auth
-- sms
-- persian
-- farsi
-- rtl
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Contributing
-- Create issues for bug reports and new feature requests in Persian or English.
-- Use standard GitHub flow: fork -> branch -> PR -> review
+Create issues for bug reports and new feature requests in Persian or English.
 
-Support / تماس
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Support / تماس
+
 - If you want support in Persian, add an Issue with label "question" and write in Persian.
+- For general support, create an issue in English.
 
-Acknowledgements
-- Built as a minimal starter for API-driven web apps with Persian support and SMS auth flow.
+## 🙏 Acknowledgements
 
-Contact
-- GitHub: https://github.com/nrzAmirHo3in
+- Built as a minimal starter for API-driven web apps with Persian support and SMS auth flow
+- Inspired by the need for full-stack solutions with native Persian/Farsi support
+- Appreciation to the Laravel and React communities for their excellent documentation and resources
+
+## 🧑‍💻 Author
+
+- **Amir Ho3in** - [nrzAmirHo3in](https://github.com/nrzAmirHo3in)
+
+## 🏷️ Keywords
+
+laravel, react, typescript, php, full-stack, starter, api, auth, sms, persian, farsi, rtl, authentication, mobile-verfication
 
 ---
 
-If you'd like, I can:
-- Make a ready-to-add LICENSE file (MIT) and provide the content.
-- Add example .env.example snippets with SMS provider examples (Twilio and Kavenegar) and sample curl commands to test SMS endpoints.
-- Translate sections or expand API docs (route list, request/response examples) in Persian.
+<div align="center">
+
+⭐ If you find this project useful, please give it a star! It helps the project reach more developers.
+
+</div>
+
