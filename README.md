@@ -12,7 +12,7 @@
 <div align="center">
   A minimal full-stack starter combining PHP Laravel backend and TypeScript/JavaScript React frontend for building API-driven web applications — with built-in Auth API, phone SMS login/verification, and Persian (Farsi) font support.
 </div>
-<div dir="rtl">
+
 ## 🇮🇷 نسخه فارسی (اول)
 
 این مخزن یک استارتر ساده فول‌استک است که بک‌اند آن با Laravel (PHP) و فرانت‌اند آن با React (TypeScript/JavaScript) ساخته شده است.
@@ -21,7 +21,7 @@
 - API و Auth API نصب و آماده‌اند
 - بخش ورود/ثبت‌نام با SMS موبایل اضافه شده
 - فونت فارسی (Persian font) اضافه و تنظیم شده تا تجربه کاربری مناسب برای زبان فارسی داشته باشید
-</div>
+- 
 ## ✨ Features
 
 - 🔐 **Authentication APIs** - Register, login, logout, refresh token, password reset
